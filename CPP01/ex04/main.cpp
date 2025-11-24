@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 16:29:38 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/21 15:07:47 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/24 12:10:18 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,25 @@ int main (int argc, char**argv){
 		std::cout << "Errore new file" << std::endl;
 		return (1);
 	}
-
 	while (std::getline(file, line)){
 		std::string result;
-		size_t pos = 0;
-		size_t found = 0;	
-		while ((found = line.find(s1, found)) != std::string::npos)
-		{
-			result = line.substr(pos,found) + s2;
-			pos = found + s2.length();
+		std::size_t pos = 0;
+		std::size_t found = 0;
+		while (1){
+			found = line.find(s1, found);
+			if (found == std::string::npos)
+			{
+				result += line.substr(pos);
+				break;
+			}
+			result += line.substr(pos, found - pos);
+			result += s2;
+			pos = found + s1.length();
 			found += s1.length();
 		}
-		new_file << result << std::endl;	
+		new_file << result << std::endl;
+
 	}
+	return 0;
 }
 	
