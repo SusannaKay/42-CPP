@@ -6,12 +6,19 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 12:14:36 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/25 14:32:29 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/28 09:48:36 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
+Harl::Harl(){
+	
+}
+
+Harl::~Harl(){
+	
+}
 
 void Harl::complain(std::string level){
 

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 12:14:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/25 13:03:30 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/28 09:49:00 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ class Harl{
 	
 	private:
 	
+	Harl();
+	~Harl();
 	void debug( void );
 	void info( void );
 	void warning( void );

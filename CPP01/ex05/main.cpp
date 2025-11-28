@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 12:14:24 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/25 14:31:22 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/26 16:26:16 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main (){
 	
 	Harl h;
-	
+
 	h.complain("DEBUG");
 	h.complain("INFO");
 	h.complain("WARNING");
@@ -23,8 +23,5 @@ int main (){
 	h.complain("");
 	h.complain("DUG");
 	
-	
-	
-
 	return 0;
 }
