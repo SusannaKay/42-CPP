@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 16:29:38 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/24 12:10:18 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/28 12:38:13 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int main (int argc, char**argv){
 	}
 	std::ifstream file(filename.c_str());
 	if(!file.is_open()){
-		std::cout << "Impossibile aprire il file" << std::endl;
+		std::cout << "File could not be opened" << std::endl;
 		return 1;
 	}
 	std::string outname = filename + ".replace";
 	std::ofstream new_file(outname.c_str());
 	if(!new_file.is_open()){
-		std::cout << "Errore new file" << std::endl;
+		std::cout << "Error new file not created" << std::endl;
 		return (1);
 	}
 	while (std::getline(file, line)){
@@ -63,6 +63,8 @@ int main (int argc, char**argv){
 		new_file << result << std::endl;
 
 	}
+	file.close();
+	new_file.close();
 	return 0;
 }
 	

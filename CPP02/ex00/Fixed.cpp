@@ -1,35 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 12:14:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/12/02 12:26:33 by skayed           ###   ########.fr       */
+/*   Created: 2026/01/02 16:26:03 by skayed            #+#    #+#             */
+/*   Updated: 2026/01/02 16:26:35 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-#define HARL_HPP
-
-#include <iostream>
-class Harl{
-
-	public:	
-	
-	Harl();
-	~Harl();
-	void complain(std::string level);
-	
-	private:
-
-	void debug( void );
-	void info( void );
-	void warning( void );
-	void error( void );
-};
-
-
-
-#endif
+#include "Fixed.hpp"

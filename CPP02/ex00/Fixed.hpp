@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 12:14:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/12/02 12:26:33 by skayed           ###   ########.fr       */
+/*   Created: 2026/01/02 16:25:42 by skayed            #+#    #+#             */
+/*   Updated: 2026/01/02 16:33:08 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-#define HARL_HPP
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
-#include <iostream>
-class Harl{
+class Fixed{
 
-	public:	
-	
-	Harl();
-	~Harl();
-	void complain(std::string level);
-	
-	private:
-
-	void debug( void );
-	void info( void );
-	void warning( void );
-	void error( void );
-};
+	private: 
+	int fixed_point;
+	static const int fractionalBits;
 
 
+	public:
+	Fixed();
+	~Fixed();
+	int getRawBits(void) const;
+	void setRawBits(int const raw);
+}
 
 #endif

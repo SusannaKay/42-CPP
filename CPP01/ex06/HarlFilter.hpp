@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 12:14:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/28 09:47:12 by skayed           ###   ########.fr       */
+/*   Updated: 2025/12/02 12:26:56 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 #include <iostream>
 class Harl{
 
-	public:
-	void complain(int i);
-	
-	private:
+	public:	
 	
 	Harl();
 	~Harl();
+	void complain(int i);
+	
+	private:
+
 	void debug( void );
 	void info( void );
 	void warning( void );
