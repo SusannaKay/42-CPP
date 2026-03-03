@@ -1,5 +1,5 @@
 NAME = bsp
-SOURCE = main.cpp Fixed.cpp Point.cpp 
+SOURCE = main.cpp Fixed.cpp Point.cpp bsp.cpp
 OBJ = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror  -std=c++98
 
