@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 12:07:13 by skayed            #+#    #+#             */
-/*   Updated: 2026/03/05 17:38:29 by skayed           ###   ########.fr       */
+/*   Created: 2026/03/05 17:39:54 by skayed            #+#    #+#             */
+/*   Updated: 2026/03/05 17:40:33 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string>
 class ClapTrap
 {
-  private:
+  protected:
 	std::string _name;
 	unsigned int _hitPoints;
 	unsigned int _energyPoints;
