@@ -1,5 +1,5 @@
-NAME = ScavTrap
-SOURCE = main.cpp ClapTrap.cpp ScavTrap.cpp
+NAME = FlagTrap
+SOURCE = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 OBJ = $(SOURCE:.cpp=.o)
 FLAGS = -Wall -Wextra -Werror  -std=c++98
 

@@ -6,34 +6,52 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 12:06:30 by skayed            #+#    #+#             */
-/*   Updated: 2026/03/05 14:13:24 by skayed           ###   ########.fr       */
+/*   Updated: 2026/03/05 21:20:53 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include <iostream>
 
-int	main(void)
+static void print_state(const ScavTrap& s)
 {
-	ClapTrap giorgio("Giorgio");
+    std::cout << "Name=" << s.getName()
+              << " HP=" << s.getHit()
+              << " EN=" << s.getEnergy()
+              << " ATK=" << s.getAttack()
+              << "\n";
+}
 
-	std::cout << "TEST ATTACK FUNCTION:" << std::endl;
-	giorgio.attack("Manuel");
-	std::cout << "Energy points left:" << giorgio.getEnergy() << std::endl;
+int main()
+{
+    std::cout << "\n--- Basic actions ---\n";
+    ScavTrap a("Carlotta");
+    print_state(a);
 
-	std::cout << "TEST TAKE DAMAGE FUNCTION:" << std::endl;
-	std::cout << "Hit points: " << giorgio.getHit() << std::endl;
-	giorgio.takeDamage(9);
-	std::cout << "Hit points: " << giorgio.getHit() << std::endl;
+    a.guardGate();
+    a.attack("Susanna");
+    a.takeDamage(10);
+    a.beRepaired(5);
+    print_state(a);
 
-	std::cout << "TEST REPAIR FUNCTION:" << std::endl;
-	std::cout << "Hit points: " << giorgio.getHit() << std::endl;
-	giorgio.beRepaired(9);
-	std::cout << "Hit points: " << giorgio.getHit() << std::endl;
+    std::cout << "\n--- Copy constructor ---\n";
+    ScavTrap c(a);
+    c.attack("copy-target");
+    print_state(c);
+    print_state(a); 
+	
+    std::cout << "\n--- Copy assignment ---\n";
+    ScavTrap b("B");
+    b = a;
+    b.attack("assigned-target");
+    print_state(b);
 
-	std::cout << "TEST ATTACK FUNCTION/ENERGY POINTS:" << std::endl;
-	for (int i = 0; i < 10; i++)
-	{
-		giorgio.attack("Manuel");
-	}
-	giorgio.beRepaired(9);
+    std::cout << "\n--- Dead check (HP=0) ---\n";
+    ScavTrap d("D");
+    d.takeDamage(200);   
+    d.attack("nope");
+    d.beRepaired(10);
+    print_state(d);
+
+    return 0;
 }
