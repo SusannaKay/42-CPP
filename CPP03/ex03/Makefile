@@ -1,7 +1,7 @@
 NAME = DiamondTrap
 SOURCE = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJ = $(SOURCE:.cpp=.o)
-FLAGS = -Wall -Wextra -Werror  -std=c++98
+FLAGS = -Wall -Wextra -Werror  -std=c++98 -Wshadow -Wno-shadow
 
 
 all: $(NAME)
