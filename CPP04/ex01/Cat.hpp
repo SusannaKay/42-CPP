@@ -7,7 +7,8 @@
 class Cat : public Animal
 {
 	private:
-	Brain	*brain;
+
+	Brain	*ideas;
 
 	public:
 		Cat();
@@ -16,6 +17,8 @@ class Cat : public Animal
 		~Cat();
 
 		void	makeSound() const;
+		void	setIdea(std::string idea, int i);
+		std::string	getIdea(int i);
 };
 
 #endif

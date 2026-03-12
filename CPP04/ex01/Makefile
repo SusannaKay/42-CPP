@@ -1,4 +1,4 @@
-NAME = brain
+NAME = animal
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
@@ -7,7 +7,7 @@ SRCS = main.cpp \
 	   Animal.cpp \
 	   Dog.cpp \
 	   Cat.cpp \
-	   Brain.cpp \
+	   Brain.cpp\
 
 OBJS = $(SRCS:.cpp=.o)
 
