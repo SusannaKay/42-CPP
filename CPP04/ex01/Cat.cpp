@@ -6,10 +6,10 @@ Cat::Cat() : ideas(new(Brain))
 	std::cout << "Cat default constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat& other) : Animal(other), Brain(other)
+Cat::Cat(const Cat& other) : Animal(other), ideas(new(Brain))
 {
 	std::cout << "Cat copy constructor called" << std::endl;
-	*this = other;
+	*ideas = *other.ideas;
 }
 
 Cat& Cat::operator=(const Cat& other)
@@ -25,7 +25,7 @@ Cat& Cat::operator=(const Cat& other)
 
 Cat::~Cat()
 {
-	delete Brain;
+	delete ideas;
 	std::cout << "Cat destructor called" << std::endl;
 }
 
@@ -34,14 +34,10 @@ void	Cat::makeSound() const
 	std::cout << "Meow meow!" << std::endl;
 }
 
-void	Cat::setidea(std::string idea, int i){
-	if (i < 0 || i >= 100)
-		std::cout << "Index out of range" << std::endl;
-	ideas[i] = idea;
+void	Cat::setIdea(const std::string &idea, int i){
+	ideas->setIdea(idea, i);
 }
 
-std::string Cat::getIdea(int i){
-		if (i < 0 || i >= 100)
-		std::cout << "Index out of range" << std::endl;
-	return (ideas[i]);
+std::string Cat::getIdea(int i) const{
+	return ideas->getIdea(i);
 }

@@ -5,11 +5,14 @@
 
 int	main(void)
 {
-	Cat *cesare = new Cat();
+Cat a;
 
-	cesare->setIdea("miao", 0);
-	std::cout << cesare->getIdea(0) << std::endl;
-	delete cesare;
+a.setIdea("fish", 0);
 
-	return 0;
+Cat b = a;
+
+b.setIdea("pizza", 0);
+
+std::cout << a.getIdea(0) << std::endl;
+std::cout << b.getIdea(0) << std::endl;
 }
