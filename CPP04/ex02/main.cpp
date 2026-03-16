@@ -6,12 +6,14 @@
 int	main(void)
 {
 Cat a;
+//Animal c;
 
 a.setIdea("fish", 0);
 
-Cat b = a;
+Dog b;
 
-b.setIdea("pizza", 0);
+b.makeSound();
+a.makeSound();
 
 std::cout << a.getIdea(0) << std::endl;
 std::cout << b.getIdea(0) << std::endl;
