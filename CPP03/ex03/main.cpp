@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 12:06:30 by skayed            #+#    #+#             */
-/*   Updated: 2026/03/07 13:17:33 by skayed           ###   ########.fr       */
+/*   Updated: 2026/03/14 14:44:46 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
     std::cout << "\n--- Who am I ---\n";
     a.whoAmI();
 
-    std::cout << "\n--- Attack (should use ScavTrap::attack) ---\n";
+    std::cout << "\n--- Attack ---\n";
     a.attack("target");
 
     std::cout << "\n--- Base abilities ---\n";

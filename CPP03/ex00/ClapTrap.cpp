@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 12:36:54 by skayed            #+#    #+#             */
-/*   Updated: 2026/03/05 21:07:49 by skayed           ###   ########.fr       */
+/*   Updated: 2026/03/14 14:30:14 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << _name << " repairs by " << amount << " hit points " << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << _name << "can't repair himself." << std::endl;
+	std::cout << "ClapTrap " << _name << " can't repair himself." << std::endl;
 }

@@ -3,7 +3,7 @@
 
 # include "WrongAnimal.hpp"
 
-class WrongCat : public WrongAnimal
+class WrongCat : virtual public WrongAnimal
 {
 	public:
 		WrongCat();

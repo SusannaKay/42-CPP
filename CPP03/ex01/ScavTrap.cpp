@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 17:02:48 by skayed            #+#    #+#             */
-/*   Updated: 2026/03/05 21:18:03 by skayed           ###   ########.fr       */
+/*   Updated: 2026/03/14 14:33:22 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
     return *this;
 }
 ScavTrap::~ScavTrap() {
-    std::cout << "ScavTrap" << _name << "destructor called\n";
+    std::cout << "ScavTrap " << _name << " destructor called\n";
 }
 
 void ScavTrap::guardGate(void)
