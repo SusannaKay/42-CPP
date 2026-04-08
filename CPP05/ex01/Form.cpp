@@ -7,15 +7,15 @@ Form::Form(std::string name, int grade)
 }
 
 Form::Form(Form &other)
-	: _name(other._name), _grade(other._grade), _isSigned(other._isSigned){
+	: _name(other._name), _grade(other._grade), _isSigned(other._isSigned)
+{
 }
 
 Form &Form::operator=(const Form &other)
 {
 	if (this != &other)
 	{
-		_name = other.getName();
-		_grade = other.getGrade();
+
 		_isSigned = other.getSigned();
 	}
 	return (*this);
@@ -31,13 +31,22 @@ int Form::getGrade() const
 	return (_grade);
 }
 
-bool Form::getSigned() const{
+bool Form::getSigned() const
+{
 	return (_isSigned);
 }
 
-void Form::beSigned(Bureaucrat &other){
+void Form::beSigned(Bureaucrat &other)
+{
 	if (other.getGrade() >= _grade)
+	{
 		_isSigned = true;
+	}
 	else
 		Form::GradeTooLowException();
+}
+
+const char *Form::GradeTooLowException::what() const throw()
+{
+	return ("its grade is too low.");
 }
