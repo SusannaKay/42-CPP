@@ -1,14 +1,19 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main(void)
 {
-	Bureaucrat tom("Tom", 150);
+	Bureaucrat tom("Tom", 40);
 	Bureaucrat betty("Betty", 1);
 
+	Form one("One", 30);
+
+
 	std::cout << tom << std::endl;
+	std::cout << one << std::endl;
 	try
 	{
-		tom.decrement();
+		tom.signForm(one);
 	}
 	catch (std::exception &e)
 	{
@@ -17,7 +22,7 @@ int	main(void)
 	std::cout << betty << std::endl;
 	try
 	{
-		betty.increment();
+		betty.signForm(one);
 	}
 	catch (std::exception &d)
 	{
