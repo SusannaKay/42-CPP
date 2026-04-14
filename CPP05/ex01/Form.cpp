@@ -3,9 +3,9 @@
 Form::Form(std::string name, int const grade, int const exec)
 	: _name(name), _grade(grade), _exec(exec), _isSigned(false)
 {
-	if (_grade > 150)
+	if (_grade > 150 || _exec > 150)
 		throw Form::GradeTooLowException();
-	else if (_grade < 1)
+	else if (_grade < 1 || _exec < 1)
 		throw Form::GradeTooHighException();
 	else
 	{
