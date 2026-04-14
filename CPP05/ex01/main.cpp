@@ -6,7 +6,7 @@ int	main(void)
 	Bureaucrat tom("Tom", 40);
 	Bureaucrat betty("Betty", 1);
 
-	Form one("One", 30);
+	Form one("One", 30, 3);
 
 
 	std::cout << tom << std::endl;
