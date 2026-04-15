@@ -1,15 +1,24 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target)
-	: AForm(target, 72, 45)
+RobotomyRequestForm::RobotomyRequestForm()
+	: AForm("Robotomy Request", 72, 45)
 {
+	_target = "Pipa";
+	std::cout << "Robotomy Request Form " << _target << " constructor called." << std::endl;
+}
+
+RobotomyRequestForm::RobotomyRequestForm(std::string target)
+	: AForm("Robotomy Request", 72, 45)
+{
+	_target = target;
 	std::cout << "Robotomy Request Form " << target << " constructor called." << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm &other)
 	: AForm(other)
 {
-	std::cout << "Robotomy Request Form " << other.getName() << " copy constructor called." << std::endl;
+	_target = other.getTarget();
+	std::cout << "Robotomy Request Form " << other.getTarget() << " copy constructor called." << std::endl;
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
@@ -23,7 +32,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
-	std::cout << "Robotomy Request Form " << getName() << " destructor called." << std::endl;
+	std::cout << "Robotomy Request Form " << _target << " destructor called." << std::endl;
 }
 
 void RobotomyRequestForm::executeAction(std::string target) const{
@@ -35,4 +44,8 @@ void RobotomyRequestForm::executeAction(std::string target) const{
 		std::cout << target << " robotomized successfully.\n";
 	else
 		std::cout << target << " robotomy failed.\n";
+}
+
+std::string RobotomyRequestForm::getTarget() const {
+	return (_target);
 }
