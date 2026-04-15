@@ -12,7 +12,7 @@ class RobotomyRequestForm : public AForm
 	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 	~RobotomyRequestForm();
 
-	void Robotomy(std::string target);
+	void executeAction(std::string target) const;
 };
 
 #endif

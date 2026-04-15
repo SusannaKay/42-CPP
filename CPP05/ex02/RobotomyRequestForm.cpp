@@ -26,11 +26,11 @@ RobotomyRequestForm::~RobotomyRequestForm()
 	std::cout << "Robotomy Request Form " << getName() << " destructor called." << std::endl;
 }
 
-void RobotomyRequestForm::Robotomy(std::string target){
+void RobotomyRequestForm::executeAction(std::string target) const{
 
 	int num = rand();
 	
-	std::cout << "BzzzZZzzz\nBzZZzzzz\nbzZzzzZz\n." ;
+	std::cout << "BzzzZZzzz\nBzZZzzzz\nbzZzzzZz\n" ;
 	if (num % 2 == 0)
 		std::cout << target << " robotomized successfully.\n";
 	else

@@ -25,9 +25,9 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	std::cout << "Shrubbery Creation form " << getName() << " destructor called." << std::endl;
 }
-void ShrubberyCreationForm::CreateFile(void)
+void ShrubberyCreationForm::executeAction(std::string target) const
 {
-	std::string filename = getName() + "_shrubbery";
+	std::string filename = target + "_shrubbery";
 	std::ofstream file(filename.c_str());
 	if (!file.is_open())
 	{
