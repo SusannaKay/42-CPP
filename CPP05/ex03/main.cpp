@@ -3,49 +3,55 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main() {
 
-Bureaucrat boss("Boss", 1);
-Bureaucrat intern("Intern", 150);
-
-std::cout << boss << std::endl;
-std::cout << intern << std::endl;
-
-std::cout << "\n=== SHRUBBERY ===" << std::endl;
-    ShrubberyCreationForm shrub("home");
-
-    intern.signForm(shrub);     // fail
-    boss.signForm(shrub);       // ok
-
-    intern.executeForm(shrub);  // fail
-    boss.executeForm(shrub);    // ok
-
-std::cout << "\n=== ROBOTOMY ===" << std::endl;
-
-    RobotomyRequestForm robot("Bender");
-
-    boss.signForm(robot);
-    boss.executeForm(robot); 
+Intern someRandomIntern;
 
 
-std::cout << "\n=== PRESIDENTIAL PARDON ===" << std::endl;
+std::cout << "TEST NOME SBAGLIATO" << std::endl;
+try{
+    AForm *form;
+    form = someRandomIntern.makeForm("shrubry creation", "home");
+    delete form;
+}
+catch (std::exception &e)
+{
+    std::cout << e.what() << std::endl;
+}
+std::cout << "TEST SHRUBBERY" << std::endl;
+try{
+    AForm *form;
+    form = someRandomIntern.makeForm("shrubbery creation", "home");
+    delete form;
+}
+catch (std::exception &e)
+{
+    std::cout << e.what() << std::endl;
+}
 
-    PresidentialPardonForm pardon("Marvin");
+std::cout << "TEST PRESIDENTIAL" << std::endl;
+try{
+    AForm *form;
+    form = someRandomIntern.makeForm("presidential pardon", "home");
+    delete form;
+}
+catch (std::exception &e)
+{
+    std::cout << e.what() << std::endl;
+}
 
-    intern.signForm(pardon);    // fail
-    boss.signForm(pardon);      // ok
-
-    intern.executeForm(pardon); // fail
-    boss.executeForm(pardon);   // ok
-
-
-std::cout << "\n=== TEST SENZA FIRMA ===" << std::endl;
-
-    ShrubberyCreationForm test("error");
-
-    boss.executeForm(test);
-
+std::cout << "TEST ROBOTOMY" << std::endl;
+try{
+    AForm *form;
+    form = someRandomIntern.makeForm("robotomy request", "home");
+    delete form;
+}
+catch (std::exception &e)
+{
+    std::cout << e.what() << std::endl;
+}
 
 return 0;
 }

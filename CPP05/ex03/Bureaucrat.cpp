@@ -66,10 +66,7 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("Grade too low.");
 }
-class GradeTooHighException : public std::exception
-{
-	virtual const char *what() const throw();
-};
+
 void Bureaucrat::signForm(AForm &other)
 {
 	try
