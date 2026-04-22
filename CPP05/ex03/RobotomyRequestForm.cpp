@@ -35,15 +35,15 @@ RobotomyRequestForm::~RobotomyRequestForm()
 	std::cout << "Robotomy Request Form " << _target << " destructor called." << std::endl;
 }
 
-void RobotomyRequestForm::executeAction(std::string target) const{
+void RobotomyRequestForm::executeAction() const{
 
 	int num = rand();
 	
 	std::cout << "BzzzZZzzz\nBzZZzzzz\nbzZzzzZz\n" ;
 	if (num % 2 == 0)
-		std::cout << target << " robotomized successfully.\n";
+		std::cout << _target << " robotomized successfully.\n";
 	else
-		std::cout << target << " robotomy failed.\n";
+		std::cout << _target << " robotomy failed.\n";
 }
 
 std::string RobotomyRequestForm::getTarget() const {

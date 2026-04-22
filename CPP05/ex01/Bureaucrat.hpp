@@ -7,11 +7,10 @@
 
 class Form;
 
-
 class Bureaucrat
 {
   private:
-	std::string _name;
+	std::string const _name;
 	int _grade;
 
   public:
@@ -36,4 +35,3 @@ class Bureaucrat
 };
 	std::ostream &operator<<(std::ostream &out, Bureaucrat const &obj);
 #endif
-

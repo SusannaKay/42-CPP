@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 {
 	if (grade > 150)
 		throw Bureaucrat::GradeTooLowException();
@@ -8,8 +8,6 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
 		throw Bureaucrat::GradeTooHighException();
 	else{
 		std::cout << "Default constructor called" << std::endl;
-		_name = name;
-		_grade = grade;
 	}
 	
 }
@@ -24,7 +22,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	if (this != &other)
 	{
 		std::cout << "Assignement operator called" << std::endl;
-		_name = other.getName();
 		_grade = other.getGrade();
 	}
 	return (*this);

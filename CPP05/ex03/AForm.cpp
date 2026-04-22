@@ -71,7 +71,7 @@ void AForm::execute(Bureaucrat const &executor) const{
 		throw FormNotSigned();
 	if (executor.getGrade() > _exec)
 		throw GradeTooLowException();
-	executeAction(getName());
+	executeAction();
 }
 
 const char *AForm::GradeTooLowException::what() const throw()

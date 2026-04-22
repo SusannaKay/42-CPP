@@ -33,7 +33,7 @@
 		return new PresidentialPardonForm(target);
 	}
 
-	AForm *Intern::makeForm(std::string name, std::string target){
+AForm *Intern::makeForm(std::string name, std::string target){
 
 		std::string forms[3] = {
 			"robotomy request",
@@ -48,8 +48,12 @@
 		for (int i = 0; i < 3; i++)
 		{
 			if(name == forms[i])
+			{
+				std::cout << "Intern creates " << forms[i] << std::endl;
 				return creators[i](target);
+			}
 		}
+		std::cout << "Intern couldn't create " << name << " because the form name is unknown." << std::endl;
 		throw UnknownException();
 		
 	}

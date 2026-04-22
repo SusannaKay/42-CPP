@@ -16,7 +16,7 @@ class AForm
 	bool _isSigned;
 
 	protected:
-	virtual void executeAction(std::string target) const = 0;
+	virtual void executeAction() const = 0;
 
   public:
 	AForm(std::string name, int grade, int exec);

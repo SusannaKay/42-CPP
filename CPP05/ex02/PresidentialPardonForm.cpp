@@ -35,9 +35,9 @@ PresidentialPardonForm::~PresidentialPardonForm()
 	std::cout << "Presidential Pardon Form " << _target << " destructor called." << std::endl;
 }
 
-void PresidentialPardonForm::executeAction(std::string target) const
+void PresidentialPardonForm::executeAction() const
 {
-	std::cout << target << "has been pardoned by Zaphod Beeblebrox.\n";
+	std::cout << _target << " has been pardoned by Zaphod Beeblebrox.\n";
 }
 
 std::string PresidentialPardonForm::getTarget() const {

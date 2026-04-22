@@ -34,16 +34,17 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	std::cout << "Shrubbery Creation form " << _target << " destructor called." << std::endl;
 }
-void ShrubberyCreationForm::executeAction(std::string target) const
+void ShrubberyCreationForm::executeAction() const
 {
-	std::string filename = target + "_shrubbery";
+	std::string filename = _target + "_shrubbery";
 	std::ofstream file(filename.c_str());
 	if (!file.is_open())
 	{
 		std::cout << "Couldn't create the target file\n";
 		return;
 	}
-	file << "↟𖠰˚☀︎ᨒ↟𖠰\n";
+	file << "      /\\/\\\n     /\\O\\*\\\n    /*/\\/\\/\\\n   /\\O\\/\\*\\/\\\n  /\\*\\/\\*\\/\\/\\\n /\\O\\/\\/*/\\/O/\\\n      ||\n      ||\n";
+
 	file.close();
 }
 
