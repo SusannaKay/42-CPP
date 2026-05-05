@@ -6,10 +6,15 @@ if (literal.length() == 1 && !std::isdigit(literal[0]))
 		return (1);
 	return (0);
 }
-
-static void printChar(double conv)
+static int is_impossible(std::string literal)
 {
-	if(std::isnan(conv) || std::isinf(conv))
+	if(literal.compare("nan") == 0 || literal.compare("nanf") || literal.compare("-inf"), literal.compare("+inf"), literal.compare("-inff") || literal.compare("+inff"))
+		return(1);
+	return(0);
+}
+static void printChar(double conv, int flag)
+{
+	if(flag)
 		std::cout << "char: impossible" << std::endl;
 	else if (conv < 0 || conv > 127)
 		std::cout << "char: impossible" << std::endl;
@@ -19,9 +24,9 @@ static void printChar(double conv)
 		std::cout << "char: '" << static_cast<char>(conv)<< "'"  << std::endl;
 }
 
-static void printInt(double conv)
+static void printInt(double conv, int flag)
 {
-	if(std::isnan(conv) || std::isinf(conv))
+	if(flag)
 		std::cout << "int: impossible" << std::endl;
 	else if (conv < INT_MIN || conv > INT_MAX)
 		std::cout << "int: impossible" << std::endl;
@@ -29,18 +34,18 @@ static void printInt(double conv)
 		std::cout << "int: " << static_cast<int>(conv) << std::endl;
 }
 
-static void printFloat(double conv)
+static void printFloat(double conv, int flag)
 {
 	float f = static_cast<float>(conv);
 	std::cout << "float: " << f;
-	if (!std::isnan(f) && !std::isinf(f) && f == static_cast<int>(conv))
+	if (!flag && f == static_cast<int>(conv))
 		std::cout << ".0";
 	std::cout << "f" << std::endl;
 } 
-static void printDouble(double conv)
+static void printDouble(double conv, int flag)
 {
 	std::cout << "double: " << conv;
-	if (!std::isnan(conv) && !std::isinf(conv) && conv == static_cast<int>(conv))
+	if (!flag && conv == static_cast<int>(conv))
 		std::cout << ".0";
 	std::cout << std::endl;
 }
@@ -49,6 +54,7 @@ void ScalarConverter::convert(std::string const literal){
 
 	double conv;
 	char *pos;
+	int	flag = 0;
 
 	if (literal.empty())
 	{
@@ -59,6 +65,7 @@ void ScalarConverter::convert(std::string const literal){
 		conv = static_cast<double>(literal[0]);
 	else
 	{
+		flag = is_impossible(literal);
 		conv = std::strtod(literal.c_str(), &pos);
 		if (pos == literal)
 		{
@@ -74,8 +81,8 @@ void ScalarConverter::convert(std::string const literal){
 			}
 		}
 	}
-	printChar(conv);
-	printInt(conv);
-	printFloat(conv);
-	printDouble(conv);	
+	printChar(conv, flag);
+	printInt(conv, flag);
+	printFloat(conv, flag);
+	printDouble(conv, flag);	
 }

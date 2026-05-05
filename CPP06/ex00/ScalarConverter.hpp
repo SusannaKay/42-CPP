@@ -5,7 +5,8 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-#include <limits>
+#include <limits.h>
+#include <cstdlib>
 
 class ScalarConverter {
 
