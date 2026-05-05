@@ -28,4 +28,5 @@ int	main(void)
 	{
 		std::cout << d.what() << std::endl;
 	}
+	std::cout << one << std::endl;
 }

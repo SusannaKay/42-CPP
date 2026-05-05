@@ -9,16 +9,19 @@ class	Bureaucrat;
 
 class AForm
 {
-  private:
+	private:
+
 	std::string const _name;
 	int const _grade;
 	int const _exec;
 	bool _isSigned;
 
 	protected:
+
 	virtual void executeAction() const = 0;
 
-  public:
+	public:
+	
 	AForm(std::string name, int grade, int exec);
 	AForm(AForm &other);
 	AForm &operator=(const AForm &other);

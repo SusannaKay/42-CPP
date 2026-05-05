@@ -15,10 +15,10 @@ std::cout << intern << std::endl;
 std::cout << "\n=== SHRUBBERY ===" << std::endl;
     ShrubberyCreationForm shrub("home");
 
-    intern.signForm(shrub);     // fail
+    intern.signForm(shrub);     // ko
     boss.signForm(shrub);       // ok
 
-    intern.executeForm(shrub);  // fail
+    intern.executeForm(shrub);  // ko
     boss.executeForm(shrub);    // ok
 
 std::cout << "\n=== ROBOTOMY ===" << std::endl;
@@ -33,14 +33,14 @@ std::cout << "\n=== PRESIDENTIAL PARDON ===" << std::endl;
 
     PresidentialPardonForm pardon("Marvin");
 
-    intern.signForm(pardon);    // fail
+    intern.signForm(pardon);    // ko
     boss.signForm(pardon);      // ok
 
-    intern.executeForm(pardon); // fail
+    intern.executeForm(pardon); // ko
     boss.executeForm(pardon);   // ok
 
 
-std::cout << "\n=== TEST SENZA FIRMA ===" << std::endl;
+std::cout << "\n=== SENZA FIRMA ===" << std::endl;
 
     ShrubberyCreationForm test("error");
 

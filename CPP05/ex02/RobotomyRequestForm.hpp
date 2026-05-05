@@ -9,7 +9,9 @@ class RobotomyRequestForm : public AForm
 	private:
 
 	std::string _target;
-  public:
+
+ 	public:
+	
     RobotomyRequestForm();
 	RobotomyRequestForm(std::string target);
 	RobotomyRequestForm(RobotomyRequestForm &other);
