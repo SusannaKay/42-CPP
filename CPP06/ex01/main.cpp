@@ -3,15 +3,17 @@
 
 int main (void){
 	
-	Data *ptr = NULL;
-	uintptr_t num;
+	Data* data = new Data;
+	data->n = 42;
 
-	num = Serializer::serialize(ptr);
+	uintptr_t serialized = Serializer::serialize(data);
+	Data* deserialized = Serializer::deserialize(serialized);
 
-	std::cout << num << std::endl;
+	std::cout << "Serialized: " << serialized << std::endl;
+	std::cout << "Deserialized: " << Serializer::serialize(deserialized) <<std::endl;
+	std::cout << "\tInt: " << deserialized->n << std::endl;
 
-	ptr = Serializer::deserialize(num);
-
-	std::cout << ptr << std::endl;
+	delete data;
+	return 0;
 
 }

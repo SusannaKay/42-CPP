@@ -1,5 +1,21 @@
 #include "ScalarConverter.hpp"
 
+ScalarConverter::ScalarConverter(){
+}
+ScalarConverter::ScalarConverter(ScalarConverter &other){
+	if (this != &other)
+		return; 
+}
+ScalarConverter &ScalarConverter::operator=(ScalarConverter &other)
+{
+	if (this != &other)
+		return (*this);
+	return (*this);
+}
+ScalarConverter::~ScalarConverter(){
+
+}
+
 static int is_char(std::string literal)
 {
 if (literal.length() == 1 && !std::isdigit(literal[0]))
@@ -8,16 +24,16 @@ if (literal.length() == 1 && !std::isdigit(literal[0]))
 }
 static int is_impossible(std::string literal)
 {
-	if(literal.compare("nan") == 0 || literal.compare("nanf") || literal.compare("-inf"), literal.compare("+inf"), literal.compare("-inff") || literal.compare("+inff"))
-		return(1);
+	if (literal.compare("nan") == 0 || literal.compare("nanf") == 0 || literal.compare("-inf")  == 0|| literal.compare("+inf") == 0|| literal.compare("-inff") == 0 || literal.compare("+inff") == 0)
+			return(1);
 	return(0);
 }
 static void printChar(double conv, int flag)
 {
-	if(flag)
+	if (flag)
 		std::cout << "char: impossible" << std::endl;
 	else if (conv < 0 || conv > 127)
-		std::cout << "char: impossible" << std::endl;
+		std::cout << "char: simpossible" << std::endl;
 	else if (!std::isprint(static_cast<char>(conv)))
 		std::cout << "char: Not Displayable" << std::endl;
 	else
@@ -26,7 +42,7 @@ static void printChar(double conv, int flag)
 
 static void printInt(double conv, int flag)
 {
-	if(flag)
+	if (flag)
 		std::cout << "int: impossible" << std::endl;
 	else if (conv < INT_MIN || conv > INT_MAX)
 		std::cout << "int: impossible" << std::endl;
@@ -74,7 +90,7 @@ void ScalarConverter::convert(std::string const literal){
 		}
 		if (*pos != '\0')
 		{
-			if ( !((*pos == 'f') && *(pos + 1) != '\0'))
+			if ( !((*pos == 'f') && *(pos++) != '\0'))
 			{
 				std::cout << "Invalid input" << std::endl;
 				return;
