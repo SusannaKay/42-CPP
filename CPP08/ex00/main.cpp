@@ -1,12 +1,15 @@
 #include "easyfind.hpp"
-#include <iostream>
 #include <vector>
 #include <list>
 
 int main(void)
 {
     int value = 42;
-    std::vector<int> v = {1, 3, 7, 9};
+    std::vector<int> v;
+    v.push_back(1);
+    v.push_back(3);
+    v.push_back(7);
+    v.push_back(9);
 
     try 
     {

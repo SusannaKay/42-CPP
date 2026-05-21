@@ -2,20 +2,20 @@ NAME = easyfind
 CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRC = main.cpp
+OBJ = $(SRC:.cpp=.o)
 
-RM = rm -f
+all : $(NAME)
 
-all: $(NAME)
-$(NAME) :$(OBJS)
-	$(CXX) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME) : $(OBJ)
+	$(CXX) $(OBJ) -o $(NAME)
 
-%o: %.cpp
+%.o: %.cpp
 	$(CXX) $(FLAGS) -c $< -o $@
 clean:
-	$(RM) $(OBJS)
+	rm -f $(OBJ)
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 re: fclean all
+
 .PHONY: all clean fclean re
