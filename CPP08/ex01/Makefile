@@ -1,12 +1,12 @@
 NAME = span
 CXX = c++
-FLAGS = -Wall -Wextra -Werror std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS =	main.cpp\
 		Span.cpp\
 
 OBJS = $(SRCS:.cpp = .o)
-RM = rm -rf
+RM = rm -f
 
 all: $(NAME)
 $(NAME) :$(OBJS)

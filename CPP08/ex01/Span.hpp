@@ -1,10 +1,10 @@
 #ifndef SPAN_HPP
-# define SPAN_hpp
+# define SPAN_HPP
 
 #include <exception>
 #include <vector>
 #include <algorithm>
-
+# include <iostream>
 
 class Span{
 
@@ -16,18 +16,28 @@ class Span{
     public:
 
     Span(unsigned int size);
-    Span(Span &other);
+    Span(const Span &other);
     Span &operator=(const Span &other);
     ~Span();
 
     void addNumber(int n);
     int shortestSpan();
     int longestSpan();
+    template <typename Iterator>
+    void addRange(Iterator begin, Iterator end)
+    {
+        while (begin != end)
+        {
+            addNumber(*begin);
+            ++begin;
+        }
+    }
+
 
     class SpanFull: public std::exception {
         virtual const char *what() const throw();
     };
-    class NoSpan: public std::exception {
+    class NotEnoughNumbers: public std::exception {
         virtual const char *what() const throw();
     };
 
