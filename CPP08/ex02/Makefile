@@ -2,20 +2,21 @@ NAME = MutantStack
 CXX = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS =	main.cpp
+SRC =	main.cpp
 
-OBJS = $(SRCS:.cpp = .o)
-RM = rm -f
+OBJ = $(SRC:.cpp=.o)
 
-all: $(NAME)
-$(NAME) :$(OBJS)
-	$(CXX) $(FLAGS) $(OBJS) -o $(NAME)
-%o: %.cpp
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	$(CXX) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
 	$(CXX) $(FLAGS) -c $< -o $@
 clean:
-	$(RM) $(OBJS)
+	rm -f $(OBJ)
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 re: fclean all
 
 .PHONY: all clean fclean re
