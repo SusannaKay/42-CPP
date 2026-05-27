@@ -94,9 +94,9 @@ Tutto questo serve per scegliere il container giusto ed avere delle performance 
 | inserimento in mezzo | O(n)   | O(1) | O(log n) |
 | ricerca              | O(n)   | O(n) | O(log n) |
 
-### ex00
+## ex00
 
-Abbiamo un db in csv con data ed exchange rate. un input di tipo data | valore ( deve poter accettare sia float che int ). Per ogni riga dobbiamo trovare il rate corretto, moltiplicare e stampare il risultato. Se la data non é nel db, dobbiamo trrovare la data piú vicina precedente. 
+Abbiamo un db in csv con data ed exchange rate. un input di tipo data | valore ( deve poter accettare sia float che int ). Per ogni riga dobbiamo trovare il rate corretto, moltiplicare e stampare il risultato. Se la data non é nel db, dobbiamo trovare la data piú vicina precedente. 
 
 Ci serve quindi un contenitore chiave - valore ordinato. Le opzioni sono std::map e std::multimap, tra queste map non ammette chiavi duplicate, quindi useremo questo contenitore.  
 
@@ -110,6 +110,72 @@ prices["2024-01-01"] = 42.0;
 Costo ricerca: O(log n) con prices.find("data")e in piú abbiamo a disposizione la funzione .lower_bound() che cerca la prima chiave non minore di un certo valore. 
 
 Quindi é un container buono per bitcoin exchange. 
-Prima di proseguire controlliamo di quali container hanno bisogno gli altri esercizi visto che se usiamo map sull'ex00, non possiamo usarlo da nessun altra parte. 
 
+Prima di proseguire controlliamo di quali container hanno bisogno gli altri esercizi visto che se usiamo map sull'ex00, non possiamo usarlo da nessun altra parte. 
+----------------------------------------
 ex01: 
+
+l esercizio richiede di usare la reverse polish notation, in cui gli operatori seguono gli operandi. Il vantaggio di questa notation é che rimuove il bisogno di dare un ordine con le parentesi. Il concetto di stack é implicito in questo metodo, quindi useró questo container per l ex01
+
+ex02:
+
+in questo esercizio dobbiamo usare l algoritmo di Ford-johnson che si puo riassumere cosi:
+
+1.crea coppie
+2.ordina le coppie
+3.costruisce una chain principale
+4.inserisce gli elementi rimanenti con binary search
+5.usa Jacobsthal per ottimizzare l’ordine degli inserimenti
+
+l algoritmo deve essere applicato su due container diversi e l idea é quella di confrontare le performance dei due container
+
+l ordinamento e la creazione di coppie cosi come i confronti sono piu rapidi ed efficaci con container che permettono l accesso con indice. Quindi sicuramente uno dei container che usero' é std::vector. L'altra cosa che mi viene in mente é che visto che ad un certo punto costruisce una chain, quindi una sorta di lista con nodi, ma per un algo del genere probabilmente é poco efficiente per accesso casuale ( oltre al fatto che non prevede l accesso per indice ).  std::deque di contro é rapido con l accesso e si possono pushare elementi front e back in maniera efficace. 
+
+----------------------------------------------
+
+### Struttura del programma
+
+- parse db
+- salvataggio in map<data, valore>
+- process input file
+--parse riga
+--validazione input
+--ricerca rate corretto
+--moltiplica
+--stampa
+#### TODO PARSING DB
+- saltare prima riga (header)
+- splittare sulla virgola
+- convertire rate 
+#### TODO PARSING INPUT
+- split su ´|´
+- substring
+- casi limite da gestire:
+-- validazione data
+--- formato giusto ( YYYY-MM-DD ) + esclusione caratteri non digit
+--- anno valido 
+--- mese valido ( 1->12 )
+--- giorno valido (positivo, non superiore a 31, gestione mesi 30 e 28 gg)
+-- valore tra 0 e 1000 (float o unsigned int )
+-- riga vuota
+
+main:
+validazione nome input -> n argc
+crea classe passando il db
+stampa output:
+- validazione su ogni riga letta quindi per ogni entry faccio check e stampo di conseguenza 
+
+tabella validazione giorni:
+se leap:
+02 --> 29
+else -->28
+01/03/05/06/08/10/12 -> 31
+else 
+30 
+
+classe:
+nei costruttori creo map
+-parsing db: 
+--mentre aggiungo nodi in map valido le date ed exchange rate
+
+
