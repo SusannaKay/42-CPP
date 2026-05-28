@@ -1,48 +1,43 @@
 #include "BitcoinExchange.hpp"
+static bool checkLeap(long year)
+{
+    if (year % 4 == 0)
+        return (false);
+    return (true);
+}
+static void validateDate(std::string date){
 
-static int validateDate(std::string date){
-
-    bool isLeap;
     long year;
-    int month;
-    int day;
-    size_t pos = 0;
-    char  *end = 0;
+    long month;
+    long day;
+    
+    if (date.length() != 10)
+        throw bitExchange::InvalidDate();
 
-    pos = date.find('-');
-    if (pos != 4)
+    if (date[4] != '-')
         throw bitExchange::InvalidYear();
-    year = std::strtol(date.substr(0, pos).c_str(), &end, 10);
-    if (*end != '\0')
-            throw bitExchange::InvalidYear();
-    //check anno corretto ( atoi + range anno + set leap)
-    pos++;
-    pos = date.find('-');
-    if (pos != 7)
+
+    if (date[7] != '-')
         throw bitExchange::InvalidMonth();
-    month = date.substr(pos, pos + 2);
-    //check mese corretto 
-    pos++;
-    day = date.substr(pos, pos + 2);
-    if (pos != (date.length() - 1))
+    char  *end = NULL;
+
+    year = std::strtol(date.substr(0, 4).c_str(), &end, 10);
+    if (*end != '\0' || year < 2009 || year > 2022)
+            throw bitExchange::InvalidYear();
+    month = std::strtol(date.substr(5, 2).c_str(), &end, 10);
+    if (*end != '\0' || month < 1 || month > 12)
+        throw bitExchange::InvalidMonth();
+    day = std::strtol(date.substr(8, 2).c_str(), &end, 10);
+    if (*end != '\0' || day < 1 || day > 31)
         throw bitExchange::InvalidDay();
-    //check giorno corretto ( check febbraio, check leap )
-    if (isLeap)
-    {
-        if (month == "02")
-        {
-            if (day < 0 || day > 29)
-                throw bitExchange::InvalidDay();
-        }
-        else if (month == )
-    }
-
-
-
-
+    int dayMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (checkLeap(year))
+        dayMonth[1] = 29;
+    if (day != dayMonth[month - 1])
+        throw bitExchange::InvalidDay();
 }
 
-void bitExchange::parseDb(){
+std::map<std::string, double>::iterator bitExchange::parseDb(){
     
     std::fstream file;
     std::string line;
@@ -53,7 +48,7 @@ void bitExchange::parseDb(){
     getline(file, line);
     if (line.compare("date,exchange_rate") != 0)
         throw bitExchange::InvalidHeader();
-    while(getline(file, line)){
+    while (getline(file, line)){
         int pos;
         std::string date;
         std::string valueStr;
@@ -64,12 +59,22 @@ void bitExchange::parseDb(){
         date = line.substr(0, pos);
         valueStr = line.substr(pos + 1, line.length());
         value = strtod(valueStr.c_str(), &end); 
-        if (!validateDate(date) || *end != '\0' || value < 0)
+        if (*end != '\0' || value < 0)
             throw bitExchange::InvalidLine();
+        try
+        {
+            validateDate(date);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }       
         prices[date] = value;
     }
     file.close();
 }
+
+
 
 const char *bitExchange::CouldNotOpen::what() const throw() {
     return("Failed to open file");
@@ -88,4 +93,7 @@ const char *bitExchange::InvalidMonth::what() const throw() {
 }
 const char *bitExchange::InvalidDay::what() const throw() {
     return("Invalid Day");
+}
+const char *bitExchange::InvalidDate::what() const throw() {
+    return("Invalid Date");
 }

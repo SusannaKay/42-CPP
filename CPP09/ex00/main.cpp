@@ -10,7 +10,7 @@ int main (int argc, char **argv){
 	std::ofstream file(filename.c_str());
 	if(!file.is_open())
 	{
-		std::cout << "Could not open. File not found." << std::endl;
+		std::cout << "Error: could not open file." << std::endl;
 	}
 	
 

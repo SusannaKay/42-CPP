@@ -21,12 +21,11 @@ class bitExchange{
     bitExchange &operator=(bitExchange &other);
     ~bitExchange();
 
-    void parseDb();
+    std::map<std::string, double>::iterator parseDb();
     
     class CouldNotOpen: public std::exception {
         virtual const char *what() const throw();
     };
-
     class InvalidHeader: public std::exception {
         virtual const char *what() const throw();
     };
@@ -42,7 +41,9 @@ class bitExchange{
     class InvalidDay: public std::exception {
         virtual const char *what() const throw();
     };
-
+    class InvalidDate: public std::exception {
+        virtual const char *what() const throw();
+    };
 };
 
 #endif
