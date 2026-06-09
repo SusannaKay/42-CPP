@@ -7,6 +7,7 @@
 #include <map>
 #include <exception>
 #include <sstream>
+#include <cstdlib>
 
 class bitExchange{
 
@@ -16,12 +17,13 @@ class bitExchange{
 
     public:
 
-    bitExchange(std::string db);
+    bitExchange();
     bitExchange(bitExchange &other);
     bitExchange &operator=(bitExchange &other);
     ~bitExchange();
 
-    std::map<std::string, double>::iterator parseDb();
+    void parseDb();
+    void printRes(std::ifstream &file);
     
     class CouldNotOpen: public std::exception {
         virtual const char *what() const throw();
@@ -47,4 +49,3 @@ class bitExchange{
 };
 
 #endif
-

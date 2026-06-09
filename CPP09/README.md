@@ -96,7 +96,7 @@ Tutto questo serve per scegliere il container giusto ed avere delle performance 
 
 ## ex00
 
-Abbiamo un db in csv con data ed exchange rate. un input di tipo data | valore ( deve poter accettare sia float che int ). Per ogni riga dobbiamo trovare il rate corretto, moltiplicare e stampare il risultato. Se la data non é nel db, dobbiamo trovare la data piú vicina precedente. 
+Abbiamo un db in csv con data ed exchange rate. Un input di tipo data | valore ( deve poter accettare sia float che int ). Per ogni riga dobbiamo trovare il rate corretto, moltiplicare e stampare il risultato. Se la data non é nel db, dobbiamo trovare la data piú vicina precedente. 
 
 Ci serve quindi un contenitore chiave - valore ordinato. Le opzioni sono std::map e std::multimap, tra queste map non ammette chiavi duplicate, quindi useremo questo contenitore.  
 
@@ -143,39 +143,42 @@ l ordinamento e la creazione di coppie cosi come i confronti sono piu rapidi ed 
 --ricerca rate corretto
 --moltiplica
 --stampa
-#### TODO PARSING DB
-- saltare prima riga (header)
-- splittare sulla virgola
-- convertire rate 
-#### TODO PARSING INPUT
-- split su ´|´
-- substring
-- casi limite da gestire:
--- validazione data
---- formato giusto ( YYYY-MM-DD ) + esclusione caratteri non digit
---- anno valido 
---- mese valido ( 1->12 )
---- giorno valido (positivo, non superiore a 31, gestione mesi 30 e 28 gg)
--- valore tra 0 e 1000 (float o unsigned int )
--- riga vuota
 
-main:
-validazione nome input -> n argc
-crea classe passando il db
+### Spiegazione funzioni 
+
+main.cpp:
+validazione input -> n argc
+apre file input -> se fallisce esce 
+crea classe ( db hardcodato nei costruttori )
 stampa output:
 - validazione su ogni riga letta quindi per ogni entry faccio check e stampo di conseguenza 
 
-tabella validazione giorni:
-se leap:
-02 --> 29
-else -->28
-01/03/05/06/08/10/12 -> 31
-else 
-30 
+BitcoinExchange.cpp:
+Il costruttore chiama subito parseDB():
+- apre data.csv
+- lettura prima riga + validazione header
+- loop lettura: 
+-- posiziona l'indice prima del separatore ','
+-- substringa data da indice 0 a pos
+-- substringa value da pos + 1, a fine stringa
+-- uso strtod passando pointer end --> value convertito da stringa a double
+-- se ritorna un valore negativo o end é diverso da fine stringa vuol dire che ci sono simboli non ammessi in strtod e che quindi si é fermato prima.
+-- validateDate()
+- -- validazione formato data YYYY-MM-DD in termini di lunghezza e posizionamento "-"
+- -- conversione dei dati in long esclusivamente per controllo validitá, nel programma manterremo la data in formato stringa perché sará piú semplice poi trovare la corrispondenza in map
+-- se i controlli non escono con errore, creo il nodo in map con chiave data e valore value.
+- chiudo il file.
 
-classe:
-nei costruttori creo map
--parsing db: 
---mentre aggiungo nodi in map valido le date ed exchange rate
+A questo punto l'oggetto é creato ed include il db in formato map. Quindi chiamo dal main la funzione printRes passando il file di input.Il funzionamento é pressapoco lo stesso di parseDB:
+- Il primo controllo é sull´header
+- cerco il divisore che in questo caso é " | "
+- mi creo le varie substringhe
+- se strtod non esce con errore:
+-- controllo data
+--- mi creo un iteratore che punta al lower_bound di date: questa funzione ti restituisce l iteratore alla data se presente o a quella successiva piú vicina. Dato che a noi serve quella precedente piú vicina, se il valore é diverso dalla data cercata e se non restituisce un iteratore all inizio della mappa allora torniamo indietro di 1.
+--- creo result e mando in stampa.
+-- se validateDate fallisce esco con bad input
+-- se non é positivo esco con not a positive number
+- tutto ció che non ho gestito e non rientra nei casi precedenti é numero invalido
 
-
+## Ex01

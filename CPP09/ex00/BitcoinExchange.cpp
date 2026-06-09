@@ -5,8 +5,35 @@ static bool checkLeap(long year)
         return (false);
     return (true);
 }
-static void validateDate(std::string date){
+bitExchange::bitExchange(){
 
+    try
+    {
+        parseDb();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
+}
+bitExchange::bitExchange(bitExchange &other) : prices(other.prices){
+
+}
+bitExchange &bitExchange::operator=(bitExchange &other){
+    if (this != &other)
+        prices = other.prices;
+    return (*this);
+}
+bitExchange::~bitExchange(){}
+
+static bool checkLeap(long year)
+{
+    if (year % 4 == 0)
+        return (false);
+    return (true);
+}
+static void validateDate(std::string date){
     long year;
     long month;
     long day;
@@ -33,16 +60,16 @@ static void validateDate(std::string date){
     int dayMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if (checkLeap(year))
         dayMonth[1] = 29;
-    if (day != dayMonth[month - 1])
+    if (day > dayMonth[month - 1])
         throw bitExchange::InvalidDay();
 }
 
 std::map<std::string, double>::iterator bitExchange::parseDb(){
     
-    std::fstream file;
+    std::ifstream file;
     std::string line;
 
-    file.open("data.csv", std::fstream::in);
+    file.open("data.csv");
     if(!file.is_open())
         throw bitExchange::CouldNotOpen();
     getline(file, line);
@@ -58,6 +85,7 @@ std::map<std::string, double>::iterator bitExchange::parseDb(){
         pos = line.find(',');
         date = line.substr(0, pos);
         valueStr = line.substr(pos + 1, line.length());
+
         value = strtod(valueStr.c_str(), &end); 
         if (*end != '\0' || value < 0)
             throw bitExchange::InvalidLine();
@@ -74,8 +102,61 @@ std::map<std::string, double>::iterator bitExchange::parseDb(){
     file.close();
 }
 
+void bitExchange::printRes(std::ifstream &file)
+{
 
+    std::string line;
+    
+    getline(file, line);
+    if (line.compare("date | value") != 0)
+        throw bitExchange::InvalidHeader();
+     while (getline(file, line)){
+        int pos;
+        std::string date;
+        std::string valueStr;
+        char *end;
+        double value;
+        errno = 0;
 
+        pos = line.find(" | ", 0);
+        date = line.substr(0, pos);
+        pos += 2;
+        valueStr = line.substr(pos + 1, line.length());
+        value = strtod(valueStr.c_str(), &end);
+        if (*end != '\0')
+        {
+            std::cout << "Error: invalid number." << std::endl;
+            continue;
+        }
+        if (value > 1000)
+        {
+            std::cout << "Error: too large a number." << std::endl;
+            continue;
+        }     
+        if (errno != ERANGE){
+            if (value >= 0)
+            {
+                try
+                {
+                   validateDate(date);
+                   std::map<std::string, double>::iterator it = prices.lower_bound(date);
+                   if (it != prices.begin() && it->first != date)
+                        it--;
+                    float res = it->second * value;
+                   std::cout << date << " => " << value <<" = " << res << std::endl;
+                }
+                catch (const std::exception& e)
+                {
+                    std::cout << "Error: bad input => " << date << std::endl;
+                }               
+            }
+            else
+                std::cout << "Error: not a positive number." << std::endl;
+        }
+        else
+            std::cout << "Error: invalid number." << std::endl;
+        }
+}
 const char *bitExchange::CouldNotOpen::what() const throw() {
     return("Failed to open file");
 }
