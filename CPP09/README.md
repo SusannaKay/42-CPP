@@ -182,3 +182,72 @@ A questo punto l'oggetto é creato ed include il db in formato map. Quindi chiam
 - tutto ció che non ho gestito e non rientra nei casi precedenti é numero invalido
 
 ## Ex01
+
+Lo scopo del programma é prendere in iput una espressione matematica in notazione Reverse polish. La notazione che siamo abituati ad usare é la infix ( 3 + 2 ). La reverse polish invece abbiamo (3 2 + ). Nel caso ad esempio di una moltiplicazione ( 3 + 2 ) * 2, viene scritta 3 4 + 2 *. Il lato positivo é che elimina completamente l'uso delle parentesi per dare la precedenza alle operazioni.
+Altro esempio:
+
+3 + (4 * 2)
+3 4 2 * + 
+Una calcolatrice RPN deve usare lo stack: l'algoritmo ha bisogno degli ultimi due valori disponibili. 
+
+ordine con cui considerare gli operandi
+right = top
+left = second
+
+8 3 - 
+nello stack sarebbe
+
+3
+8
+
+quindi 
+
+right = 3
+left = 8
+op = -
+
+quindi left op right ( in modo da non sbagliarsi con la sottrazione )
+
+#### std::stack<int>
+
+stack é un container adapter, internamente é un std::deque limitato. 
+Operazioni disponibili:
+
+push() - aggiunge a top
+void pop() - rimuove top
+top() - legge il valore in cima
+size()
+bool empty() - controlla se il container é vuoto
+
+- complessitá 0(1)
+
+#### Condizioni
+stack.size() finale deve essere necessariamente == 1
+
+rapporto numeri / operatori == 2:1
+
+lo stack avrá anche risultati parziali, non solo numeri originali 
+
+numeri originali a singola cifra
+
+Error handling:
+
+- token sconosciuto ( 2 3 s +)
+- operatore senza operandi ( + )
+- stack insufficiente ( 1 + )
+- divisione per zero 
+- stack finale con + elementi 
+
+
+std::stringstream separa automaticamente gli spazi, crea uno stream con un cursore interno che si ferma al primo separatore quando lo inseriamo in una stringa. Spazi multipli vengono ignorati automaticamente
+
+#### spiegazione funzioni:
+
+Il costruttore prende gli argomenti passati dal main come stringa, creiamo uno stream ss a partire da args e lo parsiamo buttando i char letti dentro tmp. Il while ss >> tmp continua finché ss non fallisce, cioé a fine argomento. 
+
+Il primo controllo che facciamo é se la lunghezza del pezzo "letto" é uguale ad 1. Da subject dobbiamo accettare solo cifre a 1 digit e determinati operatori, la cui lunghezza é sempre == 1. Se non rientra in quel caso lancia l'eccezione. 
+
+all'interno della condizione: pusho i numeri nello stack finché non trovo un operatore. Questo perché nella reverse notation di base quando incontro un op, eseguo l operazione sui 2 numeri precedenti. Il risultato di questa operazione viene pushata nello stack, e poi continuo a pushare numeri finché non trovo un altro operatore e cosí via. Una volta che ho finito il parsing dello stream controllo la lunghezza dello stack che deve essere di 1, e stampo, altrimenti lancio l eccezione. 
+
+## Ex02
+
