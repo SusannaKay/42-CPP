@@ -251,3 +251,140 @@ all'interno della condizione: pusho i numeri nello stack finché non trovo un op
 
 ## Ex02
 
+Dobbiamo creare un programma in grado di sortare integer positivi usando l algoritmo di ford johnson. 
+
+Se occorre un errore, dobbiamo mostrarlo sullo standard error
+
+Dobbiamo usare almeno due cointainers
+
+Gestire almeno 3000 integer diversi 
+
+Implementare l algoritmo per ogni contenitore evitando funzioni generiche
+
+output:
+
+Before : lista int non sortati
+After : lista int sortati
+Time to process a range of X elements with std::container1 : tempo in us
+Time to process a range of X elements with std::container2 : tempo in us
+
+Il formato del tempo impiegato per sortare lo scegliamo noi, ma la precisione ci deve permettere di vedere la differenza tra i due container usati 
+
+I duplicati li possiamo gestire come ci pare
+
+### Deque e Vector 
+entrambi i container permettono l accesso tramite indice, supportano push_back()
+Vector usa memoria contigua
+Deque usa memoria a blocchi 
+
+### Ford-Johnson 
+Input:
+8 3 7 1 9 2
+
+Step 1 - si creano delle coppie, se i numeri forniti sono dispari, il rimanente sará salvato in una variabile a parte
+        (8,3)
+        (7,1)
+        (9,2)
+Dovendo creare delle coppie useremo std::pair<int, int>
+
+Step 2 - ordiniamo internamente le coppie ( primo numero il min, secondo il max )
+        (3,8)
+        (1,7)
+        (2,9)
+
+Step 3 - ordinamento coppia per valori grandi 
+        (1,7)
+        (3,8)
+        (2,9)
+
+Step 4 - prendo i secondi della coppia ed il minimo assoluto e creo mainchain
+
+1 7 8 9
+
+step 5 - inserisco i pendenti minimi con lower bound
+step 6 - inserisco il numero spaiato se disparo
+
+### Jacobsthal
+
+Jacobsthal viene usato sui pendenti per ridurre il numero di confronti prima dell inserimento, cambiandone l ordine di inserimento. L idea é ordinare gli indici dei pend secondo jacobsthal e non l ordine dei numeri dei pend. 
+
+Questo algoritmo ha una sequenza tipica che ha formula 
+
+J(n) = J(n - 1) + 2 * J(n - 2)
+
+calcolando un paio di valori a titolo di esempio:
+
+J(2) = J(2 - 1) + 2 * J(2 -2)
+J(2) = 1 + 2 * 0 = 1
+
+J(3) = J(3 - 1) + 2 * J(3 -1) = 3
+
+Quindi la sequenza é:
+
+1 3 5 11 21 43 ...
+
+Che sono sti numeri?
+Sono indici che delimitano dei gruppi. Prendiamo i primi elementi: 1 3 5 11
+
+Tra 1 e 3 abbiamo n[2] e n[3]
+Tra 3 e 5 abbiamo n[4] e n[5]
+Tra 5 e 11 abbiamo n[6] n[7] n[8] n[9] n[10] n[11]
+e cosí via.
+
+Il Ford-Johnson poi li inserisce al contrario ovvero partendo dall'estremitá piu a destra a ritroso quindi 
+1
+3 2
+5 4
+11 10 9 8 7 6 
+
+Evito di approfondire l analisi matematica sennó finisco fra un paio di anni di capire questo esercizio, ma il Ford-Johnson dimostra che inserendo partendo da quella sequenza.. si riduce il numero di confronti necessari.
+
+### Ordine di chiamata delle funzioni 
+
+1. pairing
+2. sort delle coppie
+3. main chain
+4. pend
+5. Jacobsthal decide l'ordine
+6. inserimento dei pend secondo quell'ordine facendo
+        it = lower_bound(n)
+        main.insert(it, value);
+
+### Error handling
+
+- lettere
+- numeri positivi
+- overflow int
+
+## Container pair
+
+std::pair<int, int> crea sostanzialmente una struct Pair con dentro 2 int ( first e second )
+
+Costruttore std::pair<int, int> p(n1, n2);
+anche std::make_pair(n1, n2) ritorna un pair<int, int>
+
+esempio di utilizzo: std::pair<int,int> p = std::make_pair(3, 8);
+
+l'accesso é p.first, p.second
+
+### comparazione:
+tra coppie: prima usa la comparazione con first, se sono uguali, confronta i second
+sennó specifichi quale elemento vuoi confrontare
+
+main
+│
+└── process()
+     │
+     ├── processVector()
+     │     │
+     │     ├── sortVectorPairs() OK
+     │     ├── buildVectorMain() OK
+     │     ├── insertVectorPend()
+     │     └── insertVectorStraggler()
+     │
+     └── processDeque()
+           │
+           ├── sortDequePairs() OK
+           ├── buildDequeMain() OK
+           ├── insertDequePend()
+           └── insertDequeStraggler()
