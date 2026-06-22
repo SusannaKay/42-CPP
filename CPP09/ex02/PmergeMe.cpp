@@ -21,27 +21,51 @@ PmergeMe::PmergeMe(std::vector<int> input) : _left(-1)
     }
 }
 
-PmergeMe::PmergeMe(PmergeMe &other)
+PmergeMe::PmergeMe(const PmergeMe &other)
 {
     if (this != &other)
     {
         _vect = other._vect;
         _deq = other._deq;
+        _left = other._left;
     }
 }
 
-PmergeMe &PmergeMe::operator=(PmergeMe &other)
+PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 {
 
     if (this != &other)
     {
         _vect = other._vect;
         _deq = other._deq;
+        _left = other._left;
     }
     return (*this);
 }
 
 PmergeMe::~PmergeMe() {}
+
+template <typename T>
+static void printCont(const T &pairs)
+{
+    for (size_t i = 0; i < pairs.size(); i++)
+    {
+        std::cout << pairs[i] << std::endl;
+    }
+}
+
+static std::vector<size_t> jacobOrder(size_t size){
+    std::vector<size_t> order;
+    order.push_back(0);
+    order.push_back(1);
+    for (size_t i = 2; i <= size; i++){
+        size_t n = order[i -1] + (2 * order[i - 2]);
+        order.push_back(n);
+    }
+    printCont(order);
+    return order;
+
+}
 
 static bool comparePair(const std::pair<int, int> &a, const std::pair<int, int> &b){
 
@@ -69,16 +93,39 @@ void PmergeMe::mainDeque(std::deque<int> &mainchain, std::deque<int> &pending){
 void PmergeMe::processVector(){
     std::vector<int> mainchain;
     std::vector<int> pending;
+    std::vector<int>::iterator it;
 
     std::sort(_vect.begin(), _vect.end(), comparePair);
     mainVector(mainchain, pending);
+    
+    for (size_t i = 0; i < pending.size(); i++){
+        it = lower_bound(mainchain.begin(), mainchain.end(), pending[i]);
+        mainchain.insert(it, pending[i]);
+    }
+    if(_left >= 0)
+    {
+        it = lower_bound(mainchain.begin(), mainchain.end(), _left);
+        mainchain.insert(it, _left);
+    }
+    jacobOrder(pending.size());
 }
 void PmergeMe::processDeque(){
     std::deque<int> mainchain;
     std::deque<int> pending;
+    std::deque<int>::iterator it;
 
     std::sort(_deq.begin(), _deq.end(), comparePair);
     mainDeque(mainchain, pending);
+    for ( size_t i = 0; i < pending.size(); i++){
+        it = lower_bound(mainchain.begin(), mainchain.end(), pending[i]);
+        mainchain.insert(it, pending[i]);
+    }
+    if (_left >= 0){
+        it = lower_bound(mainchain.begin(), mainchain.end(), _left);
+        mainchain.insert(it, _left);
+    }
+    //printCont(mainchain);
+
 }
 
 void PmergeMe::process(){

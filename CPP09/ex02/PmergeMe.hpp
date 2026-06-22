@@ -21,9 +21,9 @@ class PmergeMe{
 
     PmergeMe();
     PmergeMe(std::vector<int> input);
-    PmergeMe(PmergeMe &other);
+    PmergeMe(const PmergeMe &other);
     ~PmergeMe();
-    PmergeMe &operator=(PmergeMe &other);
+    PmergeMe &operator=(const PmergeMe &other);
 
     void process();
     void processVector();
