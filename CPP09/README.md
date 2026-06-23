@@ -388,3 +388,14 @@ main
            ├── buildDequeMain() OK
            ├── insertDequePend()
            └── insertDequeStraggler()
+
+trasformare
+
+1 3 5 11 ...
+
+in
+
+1
+3 2
+5 4
+11 10 9 8 7 6

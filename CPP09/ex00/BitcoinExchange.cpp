@@ -27,12 +27,6 @@ bitExchange &bitExchange::operator=(bitExchange &other){
 }
 bitExchange::~bitExchange(){}
 
-static bool checkLeap(long year)
-{
-    if (year % 4 == 0)
-        return (false);
-    return (true);
-}
 static void validateDate(std::string date){
     long year;
     long month;
@@ -64,7 +58,7 @@ static void validateDate(std::string date){
         throw bitExchange::InvalidDay();
 }
 
-std::map<std::string, double>::iterator bitExchange::parseDb(){
+void bitExchange::parseDb(){
     
     std::ifstream file;
     std::string line;

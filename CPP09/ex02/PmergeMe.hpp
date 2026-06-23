@@ -8,6 +8,7 @@
 #include <vector>
 #include <exception>
 #include <algorithm>
+#include <time.h>
 
 class PmergeMe{
 
@@ -26,8 +27,8 @@ class PmergeMe{
     PmergeMe &operator=(const PmergeMe &other);
 
     void process();
-    void processVector();
-    void processDeque();
+    std::vector<int> processVector();
+    std::deque<int> processDeque();
 
     void mainDeque(std::deque<int> &mainchain, std::deque<int> &pending);
     void mainVector(std::vector<int> &mainchain, std::vector<int> &pending);
@@ -37,5 +38,15 @@ class PmergeMe{
         virtual const char *what() const throw();
     };
 };
+
+template <typename T>
+void printCont(const T &pairs)
+{
+    for (size_t i = 0; i < pairs.size(); i++)
+    {
+        std::cout << pairs[i] << " ";
+    }
+    std::cout << std::endl;
+}
 
 #endif

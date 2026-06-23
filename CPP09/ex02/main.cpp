@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <limits.h>
 
-
 static bool isInvalid(long num)
 {
     return (num < 0 || num > INT_MAX);
@@ -13,9 +12,9 @@ int main(int argc, char **argv)
 
     std::vector<int> input;
 
-    if (argc < 2)
+    if (argc < 3)
     {
-        std::cerr << "Invalid Input" << std::endl;
+        std::cerr << "Error" << std::endl;
         return 1;
     }
     for (int i = 1; argv[i]; i++)
@@ -38,15 +37,15 @@ int main(int argc, char **argv)
     try
     {
         PmergeMe test(input);
+        std::cout << "Before: ";
+        printCont(input);
         test.process();
-        // printPairs(test._vect);
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
         return 1;
     }
-    
+
     return 0;
 }
-
