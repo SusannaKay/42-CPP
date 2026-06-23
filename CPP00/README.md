@@ -417,6 +417,8 @@ PhoneBook();
 
 ## Scopo
 
+Scrivere un programma che prende gli argomenti da terminale e li stampa tutti in maiuscolo, usando un approccio C++ invece delle funzioni stile C.
+
 Prendere gli argomenti da linea di comando e stamparli in maiuscolo.
 
 Se non ci sono argomenti:
@@ -463,7 +465,9 @@ Non aggiunge spazi tra gli argomenti.
 
 # Ex01 - My Awesome PhoneBook
 
-## Idea
+## Scopo
+
+Creare una rubrica anni '80 con due classi, `PhoneBook` e `Contact`, capace di salvare massimo 8 contatti, cercarli e mostrarli in tabella.
 
 Rubrica interattiva.
 
